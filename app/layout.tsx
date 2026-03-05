@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Pinyon_Script } from "next/font/google"; // Importation de la nouvelle font
+import { Outfit, Pinyon_Script, Monoton } from "next/font/google"; // Importation de Monoton
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -9,11 +9,17 @@ const outfit = Outfit({
   variable: "--font-outfit", 
 });
 
-// Configuration de Pinyon Script
 const pinyon = Pinyon_Script({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-pinyon",
+});
+
+// Configuration de Monoton
+const monoton = Monoton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-monoton",
 });
 
 export const metadata: Metadata = {
@@ -28,8 +34,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Ajout de pinyon.variable ici */}
-      <body className={`${outfit.variable} ${pinyon.variable} font-sans antialiased`}>
+      {/* Ajout des trois variables de police ici */}
+      <body className={`${outfit.variable} ${pinyon.variable} ${monoton.variable} font-sans antialiased`}>
         <Navbar />
         {children}
         <Footer />
