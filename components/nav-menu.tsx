@@ -1,0 +1,42 @@
+"use client";
+
+import Link from "next/link";
+import type { ComponentProps } from "react";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+
+export const NavMenu = (props: ComponentProps<typeof NavigationMenu>) => (
+  <NavigationMenu {...props}>
+    {/* J'ai épuré la liste pour laisser le fichier UI gérer l'alignement et les traits verticaux */}
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="#">Acheter</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="#">Louer</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="#">Vendre</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="#">Devenir conseiller</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+);
