@@ -35,7 +35,7 @@ export default function MerciImmoHero() {
                         after:content-[''] after:absolute 
                         after:top-0 after:bottom-0 after:right-0 
                         after:left-[-80px] /* On réduit un peu l'extension pour la ligne simple */
-                        after:bg-teal-800 after:-z-10
+                        after:bg-teal-700 after:-z-10
                         /* POLYGONE SIMPLIFIÉ (4 POINTS) :
                            1. 0% 0%       : Part de l'image en haut
                            2. 100% 0%     : Coin haut droit
@@ -48,7 +48,7 @@ export default function MerciImmoHero() {
             <p className="text-xl font-medium mb-2 text-white">
               Merci agence immobilière,
             </p>
-            <h1 className="text-3xl md:text-5xl font-medium text-white leading-tight tracking-wider">
+            <h1 className="text-3xl md:text-5xl font-medium text-white leading-tight tracking-wide">
               Acheter et vendre <br />sans prise de tête
             </h1>
           </div>
