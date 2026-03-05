@@ -9,6 +9,9 @@ import {
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
+// On importe ton composant Logo (ajuste le chemin si nécessaire)
+// import { Logo } from "./logo"; 
+
 const footerLinks = [
   { title: "Nos Biens", href: "#" },
   { title: "Estimation", href: "#" },
@@ -27,17 +30,16 @@ const Footer = () => {
           clipPath: "polygon(0% 30%, 50% 0%, 70% 15%, 85% 5%, 100% 20%, 100% 100%, 0% 100%)",
         }}
       >
-        {/* pt réduit de 28/36 à 14/20 pour remonter le contenu vers les sommets */}
         <div className="mx-auto max-w-7xl pt-14 md:pt-20"> 
           <div className="flex flex-col items-center justify-start py-8 px-6">
             
-            {/* Logo Stylisé - Marge basse réduite (mb-6) */}
-            <div className="flex flex-col items-center leading-none mb-6">
-              <span className="text-2xl font-medium text-white tracking-tight">
-                Merci
+            {/* --- Intégration du Logo avec adaptation des couleurs pour fond sombre --- */}
+            <div className="flex flex-col items-center leading-none mb-8">
+              <span className="font-monoton text-2xl md:text-4xl tracking-widest text-white">
+                merci
               </span>
-              <span className="font-pinyon text-3xl text-teal-100 mt-[-2px]">
-                Immobilier
+              <span className="hidden md:block text-sm md:text-lg font-medium -mt-1 tracking-[0.4em] text-white ml-1">
+                immobilier
               </span>
             </div>
 
