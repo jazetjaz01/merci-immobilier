@@ -17,81 +17,78 @@ import { Search, Play } from "lucide-react";
 export default function MerciImmoHero() {
   const router = useRouter();
   
-  // États pour capturer les choix de l'utilisateur
   const [transaction, setTransaction] = useState("acheter");
   const [type, setType] = useState("");
   const [location, setLocation] = useState("");
 
-  const inputStyle = "h-12 w-full text-base px-6 rounded-none border-none bg-white focus-visible:ring-teal-500 transition-all flex items-center text-slate-700";
+  const inputStyle = "h-12 w-full text-base px-6 rounded-none border-none bg-white focus-visible:ring-teal-500 transition-all flex items-center text-slate-700 shadow-sm";
 
   const handleSearch = () => {
-    // Construction des paramètres de recherche pour l'URL
     const params = new URLSearchParams();
     if (transaction) params.append("transaction", transaction === "louer" ? "location" : "vente");
     if (type) params.append("type", type);
     if (location) params.append("location", location);
-
-    // Navigation vers la page annonces avec les filtres
     router.push(`/annonces?${params.toString()}`);
   };
 
   return (
-    <section className="font-sans min-h-[600px] w-full bg-background border-b overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 h-[600px] relative">
+    <section className="font-sans min-h-screen md:min-h-[600px] w-full bg-background border-b overflow-hidden">
+      <div className="flex flex-col md:grid md:grid-cols-2 md:h-[600px] relative">
         
-        {/* --- Colonne Gauche : IMAGE --- */}
-        <div className="relative h-full w-full z-0">
+        {/* --- Colonne IMAGE (Haut sur mobile, Gauche sur desktop) --- */}
+        <div className="relative h-[250px] md:h-full w-full z-0">
           <Image
             src="/femme.jpg" 
             alt="Merci Immobilier - Accompagnement" 
             fill 
             priority 
-            className="object-cover" 
+            className="object-cover object-top md:object-cover" 
           />
         </div>
 
-        {/* --- Colonne Droite : FORMULAIRE --- */}
-        <div className="relative p-8 md:p-16 flex flex-col justify-center items-center md:items-start z-10
-                        after:content-[''] after:absolute 
-                        after:top-0 after:bottom-0 after:right-0 
-                        after:left-[-80px]
-                        after:bg-teal-700 after:-z-10
+        {/* --- Colonne FORMULAIRE --- */}
+        <div className="relative p-6 md:p-16 flex flex-col justify-center items-center md:items-start z-10 bg-teal-700
+                        md:bg-transparent
+                        md:after:content-[''] md:after:absolute 
+                        md:after:top-0 md:after:bottom-0 md:after:right-0 
+                        md:after:left-[-80px]
+                        md:after:bg-teal-700 md:after:-z-10
                         md:after:[clip-path:polygon(0%_0%,100%_0%,100%_100%,80px_100%)]">
 
-          {/* Titres */}
-          <div className="mb-12 text-center md:text-left relative z-20">
-            <p className="text-xl font-medium mb-2 text-white opacity-90">
+          {/* Titres - Ajustement des tailles pour mobile */}
+          <div className="mb-8 md:mb-12 text-center md:text-left relative z-20">
+            <p className="text-lg md:text-xl font-medium mb-2 text-white opacity-90">
               Merci agence immobilière,
             </p>
-            <h1 className="text-3xl md:text-5xl font-medium text-white leading-tight tracking-wide">
-              Acheter et vendre <br />sans prise de tête
+            <h1 className="text-2xl md:text-5xl font-medium text-white leading-tight tracking-wide">
+              Acheter et vendre <br className="hidden md:block" /> sans prise de tête
             </h1>
           </div>
 
           {/* Bloc Recherche */}
           <div className="w-full max-w-xl flex flex-col overflow-visible relative z-20">
             <Tabs defaultValue="acheter" onValueChange={setTransaction} className="w-full">
-              <TabsList className="grid grid-cols-3 bg-transparent p-0 mb-8 rounded-none w-full h-12 gap-0 overflow-visible">
+              {/* Tabs ajustées pour mobile (plus petites) */}
+              <TabsList className="grid grid-cols-3 bg-transparent p-0 mb-6 rounded-none w-full h-10 md:h-12 gap-0 overflow-visible">
                 {["acheter", "louer", "vendre"].map((tab) => (
                   <TabsTrigger 
                     key={tab}
                     value={tab} 
-                    className="relative overflow-visible rounded-none h-12 text-base font-medium transition-all
+                    className="relative overflow-visible rounded-none h-10 md:h-12 text-sm md:text-base font-medium transition-all
                                text-white border-none shadow-none bg-transparent
                                data-[state=active]:bg-white data-[state=active]:text-slate-800
-                               hover:bg-white/10 group px-6"
+                               hover:bg-white/10 group px-2 md:px-6"
                   >
                     <span className="capitalize">{tab}</span>
                     <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 hidden 
                                     group-data-[state=active]:block transition-all z-50">
-                      <Play className="fill-white text-white rotate-90 size-5" />
+                      <Play className="fill-white text-white rotate-90 size-4 md:size-5" />
                     </div>
                   </TabsTrigger>
                 ))}
               </TabsList>
               
               <div className="space-y-3">
-                {/* On ne garde qu'un seul set de champs pour la simplicité, les Tabs gèrent l'état 'transaction' */}
                 <Select onValueChange={setType}>
                   <SelectTrigger className={inputStyle}>
                     <SelectValue placeholder="Que recherchez-vous ?" />
@@ -100,7 +97,6 @@ export default function MerciImmoHero() {
                     <SelectItem value="2">Maison</SelectItem>
                     <SelectItem value="1">Appartement</SelectItem>
                     <SelectItem value="terrain">Terrain</SelectItem>
-                    <SelectItem value="bureaux">Bureaux</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -119,7 +115,7 @@ export default function MerciImmoHero() {
             
             <Button 
               onClick={handleSearch}
-              className="w-full h-12 mt-4 bg-[#2D333F] hover:bg-[#1A1E24] text-white text-lg font-semibold rounded-none flex items-center justify-center gap-2 transition-colors shadow-md shrink-0"
+              className="w-full h-12 mt-6 bg-[#2D333F] hover:bg-[#1A1E24] text-white text-lg font-semibold rounded-none flex items-center justify-center gap-2 transition-colors shadow-lg"
             >
               <Search className="size-5" />
               Rechercher
