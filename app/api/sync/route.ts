@@ -86,8 +86,10 @@ export async function GET() {
         rooms: p.rooms || 0,
         bedrooms: p.bedrooms || 0,
         property_type: p.type,
+        raw_apimo_json: p,
         images: localImageUrls,
         updated_at: new Date().toISOString()
+        
       };
 
       const { error: upsertError } = await supabase
