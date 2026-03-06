@@ -7,11 +7,14 @@ export default function ContactForm({ property, agent }: { property: any, agent:
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Correction ici : on utilise React.FormEvent sans le générique 
+  // et on caste e.currentTarget pour FormData
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
     
     const payload = {
       fullName: formData.get("fullName"),
@@ -26,11 +29,21 @@ export default function ContactForm({ property, agent }: { property: any, agent:
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (res.ok) setSent(true);
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        // Affiche l'erreur renvoyée par Resend ou l'API
+        alert("Erreur API : " + (result.error?.message || result.error || "Inconnue"));
+      }
     } catch (err) {
-      console.error("Erreur lors de l'envoi", err);
+      alert("Erreur réseau : Impossible de contacter l'API");
+      console.error(err);
     } finally {
       setLoading(false);
     }

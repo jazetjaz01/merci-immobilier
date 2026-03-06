@@ -15,6 +15,7 @@ import {
   Loader2 
 } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
+import PropertyDiagnostics from "@/components/PropertyDiagnostics";
 import ContactForm from "@/components/ContactForm";
 
 export default function PropertyDetailPage() {
@@ -165,6 +166,7 @@ export default function PropertyDetailPage() {
               <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-teal-700 mb-6 flex items-center gap-4">Description <span className="h-[1px] flex-1 bg-teal-50"></span></h2>
               <p className="text-slate-600 leading-relaxed whitespace-pre-wrap text-lg font-light">{property.description}</p>
             </div>
+            <PropertyDiagnostics rawApimoJson={property.raw_apimo_json} />
           </div>
 
           {/* --- BLOC CONTACT DYNAMIQUE --- */}
