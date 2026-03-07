@@ -1,6 +1,7 @@
 import React from "react";
 
 import Hero1 from "@/components/vendre/Hero1";
+import VendreAction from "@/components/vendre/VendreAction2";
 export const metadata = {
   title: "Vendre mon bien | Merci Immobilier",
   description: "Confiez la vente de votre maison ou appartement à notre agence. Estimation offerte et accompagnement sur-mesure à Perpignan et ses environs.",
@@ -11,6 +12,7 @@ export default function VendrePage() {
     <main className="flex flex-col min-h-screen bg-teal-600/10">
    
       <Hero1 />
+      <VendreAction />
 
       {/* Section optionnelle : Les étapes de la vente (pour donner du relief à la page) */}
       <section className="py-16 ">

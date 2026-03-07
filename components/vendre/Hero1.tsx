@@ -64,27 +64,7 @@ export default function Hero1() {
         </div>
       </div>
 
-      {/* --- Zone des Boutons (Sous les deux colonnes) --- */}
-      <div className=" py-10 px-6 pt-20">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-center gap-6">
-          <Button 
-            asChild
-            className="h-16 px-10 bg-[#2D333F] hover:bg-[#1A1E24] text-white text-xl font-semibold rounded-none transition-all shadow-xl group sm:w-auto w-full"
-          >
-            <Link href="/estimation">
-              Estimer mon bien
-              <ArrowRight className="ml-3 size-6 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-          
-          <Button 
-            variant="outline"
-            className="h-16 px-10 border-2 border-teal-700 text-teal-700 bg-transparent hover:bg-teal-700 hover:text-white text-xl font-semibold rounded-none transition-all sm:w-auto w-full"
-          >
-            Nous contacter
-          </Button>
-        </div>
-      </div>
+      
     </section>
   );
 }
