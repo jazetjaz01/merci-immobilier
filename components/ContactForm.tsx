@@ -17,14 +17,16 @@ export default function ContactForm({ property, agent }: { property: any, agent:
     const formData = new FormData(form);
     
     const payload = {
-      fullName: formData.get("fullName"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      hasPropertyToSell: formData.get("hasPropertyToSell") === "on",
-      propertyTitle: property.title,
-      propertyRef: property.reference,
-      agentEmail: agent?.email
-    };
+  fullName: formData.get("fullName"),
+  email: formData.get("email"),
+  phone: formData.get("phone"),
+  hasPropertyToSell: formData.get("hasPropertyToSell") === "on",
+  propertyTitle: property.title,
+  propertyRef: property.reference,
+  city: property.city,
+  zipcode: property.zipcode,
+  price: property.price 
+};
 
     try {
       const res = await fetch("/api/contact", {

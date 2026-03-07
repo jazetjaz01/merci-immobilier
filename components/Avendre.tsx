@@ -45,7 +45,7 @@ export default function EstimerBienSection() {
             }}
           >
             <Image
-              src="/maison1.jpg" 
+              src="/xsalon1.jpg" 
               alt="Estimation immobilière" 
               fill 
               className="object-cover scale-110"
