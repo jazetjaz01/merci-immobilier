@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Recrutement() {
   return (
-    <section className="w-full bg-teal-600/10 overflow-hidden pt-0 pb-16 md:pb-24">
+    <section className="w-full bg-slate-200 overflow-hidden pt-0 pb-16 md:pb-24">
       {/* On passe à gap-8 pour un espacement équilibré et élégant */}
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-start">
         
@@ -34,7 +34,7 @@ export default function Recrutement() {
                 Devenez
               </h2>
               <p className="text-3xl md:text-4xl font-medium text-slate-800">
-                acteur de <span className="font-pinyon text-5xl md:text-6xl text-teal-700 italic">votre succès</span>
+                acteur de <span className="font-pinyon text-5xl md:text-6xl  ">votre succès</span>
               </p>
             </div>
 

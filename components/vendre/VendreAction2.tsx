@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function EstimerEnLigneTrapeze() {
   return (
-    <section className="w-full bg-teal-500/10 overflow-hidden pt-12 md:pt-16 pb-0">
+    <section className="w-full bg-slate-200 overflow-hidden pt-12 md:pt-16 pb-0">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end">
         
         {/* --- Colonne Image : Forme Trapèze collée en bas --- */}
@@ -19,7 +19,7 @@ export default function EstimerEnLigneTrapeze() {
             }}
           >
             <Image
-              src="/accueil/maison1.jpg" 
+              src="/vendre/vendre4.jpg" 
               alt="Estimation immobilière en ligne" 
               fill 
               className="object-cover object-center scale-110" 
@@ -37,7 +37,7 @@ export default function EstimerEnLigneTrapeze() {
                 Estimer mon bien
               </h2>
               <p className="text-2xl md:text-4xl font-medium text-slate-800">
-                <span className="font-pinyon text-4xl md:text-5xl text-teal-700 italic">en ligne</span> avec Merci
+                <span className="font-pinyon text-4xl md:text-5xl  italic">en ligne</span> avec Merci
               </p>
             </div>
 

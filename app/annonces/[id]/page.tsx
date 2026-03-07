@@ -91,7 +91,7 @@ export default function PropertyDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-teal-600/10 pt-6 pb-4 font-sans relative">
+    <div className="min-h-screen bg-slate-200 pt-6 pb-4 font-sans relative">
       
       {/* --- LIGHTBOX --- */}
       {isGalleryOpen && (

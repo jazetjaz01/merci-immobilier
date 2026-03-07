@@ -157,7 +157,7 @@ function SearchBarContent({ onSearch }: { onSearch: (filters: any) => void }) {
 
 export default function SearchBar({ onSearch }: { onSearch: (filters: any) => void }) {
   return (
-    <div className="w-full bg-teal-700 py-3 px-4 relative z-50 shadow-md">
+    <div className="w-full bg-teal-700 py-3 px-4 relative z-50 pb-6 ">
       <Suspense fallback={<div className="text-white text-center text-xs">Chargement...</div>}>
         <SearchBarContent onSearch={onSearch} />
       </Suspense>

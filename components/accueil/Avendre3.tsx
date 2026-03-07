@@ -16,7 +16,7 @@ export default function Avendre() {
                 Vous avez un bien
               </h2>
               <p className="text-3xl md:text-4xl font-medium text-slate-800">
-                <span className="font-pinyon text-5xl md:text-6xl text-teal-700 italic">l'immobilier</span> à vendre ?
+                <span className="font-pinyon text-5xl md:text-6xl">l'immobilier</span>  à vendre ?
               </p>
             </div>
 

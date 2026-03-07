@@ -9,9 +9,6 @@ import {
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
-// On importe ton composant Logo (ajuste le chemin si nécessaire)
-// import { Logo } from "./logo"; 
-
 const footerLinks = [
   { title: "Nos Biens", href: "#" },
   { title: "Estimation", href: "#" },
@@ -23,7 +20,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <div className="w-full bg-teal-600/10">
+    <div className="w-full bg-slate-200">
       <footer 
         className="w-full bg-teal-700"
         style={{
@@ -33,17 +30,17 @@ const Footer = () => {
         <div className="mx-auto max-w-7xl pt-14 md:pt-20"> 
           <div className="flex flex-col items-center justify-start py-8 px-6">
             
-            {/* --- Intégration du Logo avec adaptation des couleurs pour fond sombre --- */}
+            {/* --- Logo : Passage en Blanc pour fond Teal --- */}
             <div className="flex flex-col items-center leading-none mb-8">
-              <span className="font-monoton text-2xl md:text-4xl tracking-widest text-white">
+              <span className="font-monoton text-2xl md:text-4xl tracking-widest text-white uppercase">
                 merci
               </span>
-              <span className="hidden md:block text-sm md:text-lg font-medium -mt-1 tracking-[0.4em] text-white ml-1">
+              <span className="hidden md:block text-sm md:text-lg font-medium -mt-1 tracking-[0.4em] text-white ml-1 ">
                 immobilier
               </span>
             </div>
 
-            {/* Navigation */}
+            {/* Navigation : Remplacement par du blanc et du teal très clair */}
             <ul className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
               {footerLinks.map(({ title, href }) => (
                 <li key={title}>
@@ -59,28 +56,32 @@ const Footer = () => {
           </div>
 
           <div className="px-6">
+            {/* Séparateur léger pour fond foncé */}
             <Separator className="bg-white/20" />
           </div>
 
           <div className="flex flex-col-reverse items-center justify-between gap-x-2 gap-y-6 px-6 py-10 sm:flex-row">
             
+            {/* Copyright Blanc avec signature Pinyon */}
             <span className="text-teal-100/80 text-sm font-medium">
               &copy; {new Date().getFullYear()}{" "}
-              <span className="font-pinyon text-lg text-white">Merci</span> Immobilier. 
-              Tous droits réservés.
+              <span className="font-pinyon text-2xl text-white">Merci</span> 
+              <span className="ml-1 text-white">Immobilier.</span>
+              {" "}Tous droits réservés.
             </span>
 
-            <div className="flex items-center gap-6 text-teal-100">
-              <Link href="#" className="hover:text-white transition-colors">
+            {/* Réseaux Sociaux : Blanc avec survol brillant */}
+            <div className="flex items-center gap-6 text-white">
+              <Link href="#" className="hover:text-teal-200 transition-colors">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="hover:text-teal-200 transition-colors">
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="hover:text-teal-200 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link href="#" className="hover:text-teal-200 transition-colors">
                 <Youtube className="h-5 w-5" />
               </Link>
             </div>

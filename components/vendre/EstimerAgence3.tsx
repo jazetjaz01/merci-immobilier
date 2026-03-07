@@ -6,7 +6,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 
 export default function EstimerAgenceMiroir() {
   return (
-    <section className="w-full bg-teal-600/10 overflow-hidden pt-12 pb-16 md:pb-24">
+    <section className="w-full bg-slate-200 overflow-hidden pt-12 pb-16 md:pb-24">
       {/* gap-4 pour un espace minimal entre les colonnes de la grille */}
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         
@@ -14,7 +14,7 @@ export default function EstimerAgenceMiroir() {
         <div className="flex flex-col order-2 md:order-1 md:pl-16 lg:pl-32 mt-8 md:mt-0">
           <div className="max-w-xl">
             {/* Badge Expertise */}
-            <div className="flex items-center gap-2 text-teal-700 mb-4">
+            <div className="flex items-center gap-2  mb-4">
               <MapPin className="size-4" />
               <span className="text-sm font-semibold uppercase tracking-wider">Expertise Locale</span>
             </div>
@@ -24,7 +24,7 @@ export default function EstimerAgenceMiroir() {
                 Estimer mon bien
               </h2>
               <p className="text-3xl md:text-4xl font-medium text-slate-800">
-                en <span className="font-pinyon text-5xl md:text-6xl text-teal-700 italic">agence</span>
+                en <span className="font-pinyon text-5xl md:text-6xl  ">agence</span>
               </p>
             </div>
 

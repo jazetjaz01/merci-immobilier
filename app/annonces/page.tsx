@@ -87,7 +87,7 @@ export default function AnnoncesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-teal-600/10">
+    <div className="min-h-screen bg-slate-200">
       <div className="w-full">
         <SearchBar onSearch={handleSearch} />
       </div>
@@ -96,7 +96,7 @@ export default function AnnoncesPage() {
         <div className="flex justify-between items-end mb-8">
           <div>
             <h1 className="text-3xl font-medium text-slate-800">
-              Nos Biens <span className="font-pinyon text-teal-700 text-4xl">disponibles</span>
+              Nos Biens <span className="font-pinyon  text-4xl">disponibles</span>
             </h1>
             <p className="text-slate-500 mt-2">
               {loading ? "Chargement..." : `${filteredProperties.length} annonces trouvées`}

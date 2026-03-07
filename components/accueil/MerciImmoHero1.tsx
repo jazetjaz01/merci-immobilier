@@ -47,23 +47,23 @@ export default function MerciImmoHero() {
         </div>
 
         {/* --- Colonne FORMULAIRE --- */}
-        <div className="relative p-6 md:p-16 flex flex-col justify-center items-center md:items-start z-10 bg-teal-700
+        <div className="relative p-6 md:p-16 flex flex-col justify-center items-center md:items-start z-10 bg-slate-300
                         md:bg-transparent
                         md:after:content-[''] md:after:absolute 
                         md:after:top-0 md:after:bottom-0 md:after:right-0 
                         md:after:left-[-80px]
-                        md:after:bg-teal-700 md:after:-z-10
+                        md:after:bg-slate-300 md:after:-z-10
                         md:after:[clip-path:polygon(0%_0%,100%_0%,100%_100%,80px_100%)]">
 
           {/* Titres - Ajustement des tailles pour mobile */}
-          <div className="mb-8 md:mb-12 text-center md:text-left relative z-20">
-            <p className="text-lg md:text-xl font-medium mb-2 text-white opacity-90">
-              Merci agence immobilière,
-            </p>
-            <h1 className="text-2xl md:text-5xl font-medium text-white leading-tight tracking-wide">
-              Acheter et vendre <br className="hidden md:block" /> sans prise de tête
-            </h1>
-          </div>
+         <div className="mb-6 md:mb-8 text-center md:text-left relative z-20">
+  <p className="text-lg md:text-xl font-medium mb-0  opacity-90 leading-none">
+    Merci agence immobilière,
+  </p>
+  <h1 className="text-2xl md:text-5xl font-medium text-slate-900 leading-tight tracking-wide mt-1">
+    Acheter et vendre sans <br /> <span className="font-pinyon text-4xl md:text-6xl  italic mx-1">prise</span> de tête
+  </h1>
+</div>
 
           {/* Bloc Recherche */}
           <div className="w-full max-w-xl flex flex-col overflow-visible relative z-20">

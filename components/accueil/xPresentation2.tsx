@@ -33,7 +33,7 @@ export default function Presentation() {
                 Merci
               </h2>
               <p className="text-3xl md:text-4xl font-medium text-slate-800">
-                vous fera aimer <span className="font-pinyon text-4xl md:text-5xl italic">l'immobilier</span>
+                vous fera aimer <span className="font-pinyon text-4xl md:text-5xl ">l'immobilier</span>
               </p>
             </div>
 

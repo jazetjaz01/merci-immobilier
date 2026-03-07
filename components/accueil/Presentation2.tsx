@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function PresentationTrapeze() {
   return (
-    <section className="w-full bg-teal-500/10 overflow-hidden pt-12 md:pt-16 pb-0">
+    <section className="w-full bg-slate-200 overflow-hidden pt-12 md:pt-16 pb-0">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end">
         
         {/* --- Colonne Image : Hauteur réduite et collée en bas --- */}
@@ -34,7 +34,7 @@ export default function PresentationTrapeze() {
                 Merci
               </h2>
               <p className="text-2xl md:text-4xl font-medium text-slate-800">
-                vous fera aimer <span className="font-pinyon text-4xl md:text-5xl text-teal-700 italic">l'immobilier</span>
+                vous fera aimer <span className="font-pinyon text-4xl md:text-5xl  italic">l'immobilier</span>
               </p>
             </div>
 
