@@ -38,7 +38,7 @@ export default function MerciImmoHero() {
         {/* --- Colonne IMAGE (Haut sur mobile, Gauche sur desktop) --- */}
         <div className="relative h-[250px] md:h-full w-full z-0">
           <Image
-            src="/femme.jpg" 
+            src="/accueil/femme1.jpg" 
             alt="Merci Immobilier - Accompagnement" 
             fill 
             priority 

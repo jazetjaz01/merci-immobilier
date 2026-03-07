@@ -22,7 +22,7 @@ export default function Recrutement() {
             }}
           >
             <Image
-              src="/femme2.jpg" // Pense à ajouter une photo d'équipe ou d'agent
+              src="/accueil/femme2.jpg" // Pense à ajouter une photo d'équipe ou d'agent
               alt="Rejoindre l'équipe Merci Immobilier" 
               fill 
               className="object-cover scale-105"
