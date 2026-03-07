@@ -8,7 +8,8 @@ import Link from "next/link";
 
 export default function Hero1() {
   return (
-    <section className="font-sans min-h-screen md:min-h-[600px] w-full bg-background border-b overflow-hidden">
+    <section className="font-sans w-full overflow-hidden">
+      {/* --- Grille Principale --- */}
       <div className="flex flex-col md:grid md:grid-cols-2 md:h-[600px] relative">
         
         {/* --- Colonne IMAGE (Gauche) --- */}
@@ -32,7 +33,7 @@ export default function Hero1() {
                         md:after:[clip-path:polygon(0%_0%,100%_0%,100%_100%,80px_100%)]">
 
           {/* Contenu textuel */}
-          <div className="mb-8 text-center md:text-left relative z-20 max-w-lg">
+          <div className="text-center md:text-left relative z-20 max-w-lg">
             <p className="text-lg md:text-xl font-medium mb-3 text-white opacity-90">
               Propriétaires,
             </p>
@@ -44,8 +45,8 @@ export default function Hero1() {
               Confiez-nous la vente de votre bien et profitez d'un accompagnement sur-mesure, de l'estimation offerte jusqu'à la signature finale.
             </p>
 
-            {/* Liste d'arguments rapides pour rassurer */}
-            <ul className="space-y-3 mb-10 text-white/90">
+            {/* Liste d'arguments */}
+            <ul className="space-y-3 text-white/90">
               <li className="flex items-center gap-3 justify-center md:justify-start">
                 <CheckCircle2 className="size-5 text-teal-300" />
                 <span>Estimation précise sous 48h</span>
@@ -59,27 +60,29 @@ export default function Hero1() {
                 <span>Photos professionnelles et visites ciblées</span>
               </li>
             </ul>
-
-            {/* Boutons d'action */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
-              <Button 
-                asChild
-                className="h-14 px-8 bg-[#2D333F] hover:bg-[#1A1E24] text-white text-lg font-semibold rounded-none transition-all shadow-xl group"
-              >
-                <Link href="/estimation">
-                  Estimer mon bien
-                  <ArrowRight className="ml-2 size-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              
-              <Button 
-                variant="outline"
-                className="h-14 px-8 border-2 border-white text-white bg-transparent hover:bg-white hover:text-teal-700 text-lg font-semibold rounded-none transition-all"
-              >
-                Nous contacter
-              </Button>
-            </div>
           </div>
+        </div>
+      </div>
+
+      {/* --- Zone des Boutons (Sous les deux colonnes) --- */}
+      <div className=" py-10 px-6 pt-20">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-center gap-6">
+          <Button 
+            asChild
+            className="h-16 px-10 bg-[#2D333F] hover:bg-[#1A1E24] text-white text-xl font-semibold rounded-none transition-all shadow-xl group sm:w-auto w-full"
+          >
+            <Link href="/estimation">
+              Estimer mon bien
+              <ArrowRight className="ml-3 size-6 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+          
+          <Button 
+            variant="outline"
+            className="h-16 px-10 border-2 border-teal-700 text-teal-700 bg-transparent hover:bg-teal-700 hover:text-white text-xl font-semibold rounded-none transition-all sm:w-auto w-full"
+          >
+            Nous contacter
+          </Button>
         </div>
       </div>
     </section>

@@ -9,11 +9,11 @@ export const metadata = {
 export default function VendrePage() {
   return (
     <main className="flex flex-col min-h-screen bg-teal-600/10">
-      {/* Composant Hero (le code que nous avons créé précédemment) */}
+   
       <Hero1 />
 
       {/* Section optionnelle : Les étapes de la vente (pour donner du relief à la page) */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 ">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-slate-800 mb-12">
