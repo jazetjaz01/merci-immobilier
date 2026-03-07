@@ -16,7 +16,7 @@ export default function Presentation() {
             }}
           >
             <Image
-              src="/salon1.jpg" 
+              src="/accueil/salon1.jpg" 
               alt="Maison Merci Immobilier" 
               fill 
               className="object-cover scale-105"
