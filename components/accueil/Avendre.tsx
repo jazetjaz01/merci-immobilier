@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-export default function EstimerBienSection() {
+export default function Avendre() {
   return (
     <section className="w-full bg-white overflow-hidden pt-12 pb-16 md:pb-24">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-start md:items-end">
@@ -45,7 +45,7 @@ export default function EstimerBienSection() {
             }}
           >
             <Image
-              src="/xsalon1.jpg" 
+              src="/accueil/maison1.jpg" 
               alt="Estimation immobilière" 
               fill 
               className="object-cover scale-110"
