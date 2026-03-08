@@ -19,7 +19,7 @@ export default function EstimerEnLigneTrapeze() {
             }}
           >
             <Image
-              src="/vendre/vendre4.jpg" 
+              src="/vendre/vendre2.jpg" 
               alt="Estimation immobilière en ligne" 
               fill 
               className="object-cover object-center scale-110" 

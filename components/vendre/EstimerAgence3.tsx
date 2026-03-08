@@ -59,7 +59,7 @@ export default function EstimerAgenceMiroir() {
             }}
           >
             <Image
-              src="/avendre/estimer3.jpg" 
+              src="/vendre/vendre3.jpg" 
               alt="Estimation en agence Sixième Avenue" 
               fill 
               className="object-cover object-top scale-110" 
