@@ -107,7 +107,7 @@ export default function AnnoncesPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
             <Loader2 className="h-10 w-10 animate-spin mb-4 text-teal-600" />
-            <p>Alamiia recherche vos biens...</p>
+            <p>Nous  recherchons vos biens...</p>
           </div>
         ) : (
           /* Modification : grid-cols-1 à xl:grid-cols-4 pour avoir 4 colonnes sur grand écran */

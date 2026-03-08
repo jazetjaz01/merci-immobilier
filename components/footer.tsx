@@ -10,12 +10,13 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
-  { title: "Nos Biens", href: "#" },
+
   { title: "Estimation", href: "#" },
   { title: "L'Agence", href: "#" },
   { title: "Recrutement", href: "#" },
   { title: "Contact", href: "#" },
-  { title: "Mentions Légales", href: "#" },
+  { title: "Mentions Légales", href: "mentions" },
+    { title: "Confidentialite", href: "confidentialite" },
 ];
 
 const Footer = () => {
