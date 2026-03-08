@@ -86,7 +86,7 @@ export default function EstimationDesignLuxeFinal() {
             style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%)" }}
           >
             <Image
-              src="/vendre/vendre4.jpg" 
+              src="/vendre/vendre2.jpg" 
               alt="Estimation Merci Immobilier France" 
               fill 
               className="object-cover object-top scale-105 transition-transform duration-1000 hover:scale-110" 

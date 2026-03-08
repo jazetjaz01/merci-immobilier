@@ -106,8 +106,9 @@ export default function MerciImmoHero() {
                   </SelectTrigger>
                   <SelectContent className="rounded-none">
                     <SelectItem value="Perpignan">Perpignan</SelectItem>
-                    <SelectItem value="Villeneuve-de-la-Raho">Villeneuve-de-la-Raho</SelectItem>
-                    <SelectItem value="Canet-en-Roussillon">Canet-en-Roussillon</SelectItem>
+                    <SelectItem value="Paris">Paris</SelectItem>
+                    <SelectItem value="Bordeaux">Bordeaux</SelectItem>
+                    <SelectItem value="Nice">Nice</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

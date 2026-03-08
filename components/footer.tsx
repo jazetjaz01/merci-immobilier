@@ -14,7 +14,7 @@ const footerLinks = [
   { title: "Estimation", href: "#" },
   { title: "L'Agence", href: "#" },
   { title: "Recrutement", href: "#" },
-  { title: "Contact", href: "#" },
+  { title: "Contact", href: "contact" },
   { title: "Mentions Légales", href: "mentions" },
     { title: "Confidentialite", href: "confidentialite" },
 ];
