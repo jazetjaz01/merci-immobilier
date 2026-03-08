@@ -11,7 +11,7 @@ const questions = [
   { key: "surface", q: "Quelle est la surface approximative ?" },
   { key: "ville", q: "Dans quelle ville se situe-t-il ?" },
   { key: "etat", q: "Quel est l'état général du bien ?" },
-  { key: "nom", q: "Quel est votre nom ?" }, // Séparé pour Resend
+  { key: "nom", q: "Quel est votre nom ?" },
   { key: "prenom", q: "Votre prénom ?" },
   { key: "email", q: "Votre email ?" },
   { key: "telephone", q: "Votre numéro de téléphone ?" },
@@ -24,7 +24,6 @@ export default function EstimationDesignLuxeFinal() {
   
   const [step, setStep] = useState(0);
   const [input, setInput] = useState("");
-  // --- AJOUT : Stockage des réponses ---
   const [answers, setAnswers] = useState<Record<string, string>>({});
   
   const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -38,23 +37,18 @@ export default function EstimationDesignLuxeFinal() {
 
     const currentQuestion = questions[step];
     const userResponse = input;
-
-    // 1. On sauvegarde la réponse
     const updatedAnswers = { ...answers, [currentQuestion.key]: userResponse };
     setAnswers(updatedAnswers);
 
-    // 2. On affiche le message utilisateur
     setMessages(prev => [...prev, { role: "user", content: userResponse }]);
     setInput("");
     
-    // 3. Question suivante ou Envoi
     if (step + 1 < questions.length) {
       setTimeout(() => {
         setMessages(prev => [...prev, { role: "assistant", content: questions[step + 1].q }]);
         setStep(step + 1);
       }, 600);
     } else {
-      // --- AJOUT : Appel à l'API Resend ---
       setTimeout(async () => {
         setMessages(prev => [...prev, { role: "assistant", content: "Analyse en cours... ⌛" }]);
         
@@ -74,7 +68,7 @@ export default function EstimationDesignLuxeFinal() {
             throw new Error();
           }
         } catch (error) {
-          setMessages(prev => [...prev, { role: "assistant", content: "Désolé, une erreur est survenue. Pouvez-vous nous contacter directement au 04... ?" }]);
+          setMessages(prev => [...prev, { role: "assistant", content: "Désolé, une erreur est survenue. Pouvez-vous nous contacter directement ?" }]);
         }
       }, 800);
     }
@@ -82,17 +76,18 @@ export default function EstimationDesignLuxeFinal() {
 
   return (
     <section className="w-full bg-slate-200 overflow-hidden pt-12 pb-16 md:pb-24 min-h-screen">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+      {/* On réduit le gap-12 à gap-6 pour rapprocher les colonnes au niveau de la grille */}
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-28 items-start">
         
-        {/* Colonne IMAGE */}
-        <div className="relative flex justify-center md:justify-start h-[450px] md:h-[600px] w-full order-1 md:mt-24 md:-ml-12">
+        {/* Colonne IMAGE - On réduit le décalage négatif à -ml-4 pour un rapprochement fluide */}
+        <div className="relative flex justify-center md:justify-end h-[450px] md:h-[600px] w-full order-1 md:mt-24 md:-ml-4">
           <div 
             className="relative w-full h-full max-w-[500px] overflow-hidden shadow-2xl bg-slate-300"
             style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 80%)" }}
           >
             <Image
-              src="/accueil/femme2.jpg" 
-              alt="Estimation Merci Immobilier Perpignan" 
+              src="/vendre/vendre4.jpg" 
+              alt="Estimation Merci Immobilier France" 
               fill 
               className="object-cover object-top scale-105 transition-transform duration-1000 hover:scale-110" 
               priority
@@ -100,8 +95,8 @@ export default function EstimationDesignLuxeFinal() {
           </div>
         </div>
 
-        {/* Colonne TEXTE & CHAT */}
-        <div className="flex flex-col order-2 md:pl-20 mt-0 md:mt-10">
+        {/* Colonne TEXTE & CHAT - On réduit md:pl-20 à md:pl-8 */}
+        <div className="flex flex-col order-2 md:pl-8 mt-0 md:mt-10">
           <div className="max-w-xl">
             <div className="flex flex-col leading-tight mb-4">
               <h2 className="text-4xl md:text-5xl font-medium text-slate-800">Obtenez</h2>
@@ -113,7 +108,7 @@ export default function EstimationDesignLuxeFinal() {
             <div className="flex items-start gap-3 mb-8 p-4 bg-white/30 border border-white/50 rounded-sm italic text-slate-700 text-sm leading-relaxed shadow-sm">
               <Cpu className="w-5 h-5 text-teal-700 mt-1 flex-shrink-0" />
               <p>
-                Nous utilisons l&apos;IA <strong>Alamiia</strong> pour collecter vos informations. Vos données seront utilisées exclusivement par nos conseillers pour votre estimation.
+                Nous utilisons une intelligence artificielle de  <strong> Merci Immobilier</strong> pour collecter vos informations. Vos données seront utilisées exclusivement par nos conseillers pour votre estimation.
               </p>
             </div>
 

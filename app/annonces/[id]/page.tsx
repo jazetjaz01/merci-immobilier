@@ -71,7 +71,7 @@ export default function PropertyDetailPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-teal-600/5">
         <Loader2 className="h-12 w-12 animate-spin text-teal-700 mb-4" />
-        <p className="text-teal-900 font-medium tracking-widest uppercase text-xs">Alamiia prépare la visite...</p>
+        <p className="text-teal-900 font-medium tracking-widest uppercase text-xs">Merci Immobilier  prépare la visite...</p>
       </div>
     );
   }
