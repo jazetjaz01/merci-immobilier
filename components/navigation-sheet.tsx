@@ -18,13 +18,25 @@ export const NavigationSheet = () => {
       </VisuallyHidden>
 
       <SheetTrigger asChild>
-        <Button size="icon" variant="outline">
+        <Button size="icon" variant="outline" aria-label="Ouvrir le menu">
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent className="px-6 py-3">
-        <Logo />
-        <NavMenu className="mt-6 [&>div]:h-full" orientation="vertical" />
+      
+      <SheetContent side="right" className="px-6 py-6 flex flex-col items-center">
+        <div className="w-full flex justify-start">
+          <Logo />
+        </div>
+        
+        {/* Correction : On retire max-w-max pour permettre au menu de prendre 
+          toute la largeur du Sheet et on centre les items.
+        */}
+        <div className="w-full mt-10">
+          <NavMenu 
+            className="w-full max-w-full flex-col items-center" 
+            orientation="vertical" 
+          />
+        </div>
       </SheetContent>
     </Sheet>
   );
