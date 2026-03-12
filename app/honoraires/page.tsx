@@ -89,7 +89,7 @@ export default function HonorairesPage() {
 
         <div className="text-center mt-12">
           <p className="text-slate-400 text-xs italic">
-            Merci Immobilier — SIRET : [Votre Numéro] — Carte Professionnelle : [Votre Numéro]
+            Merci Immobilier — SIRET : 85222662000015 — Carte Professionnelle : cpi 66012021000000021
           </p>
         </div>
       </div>
