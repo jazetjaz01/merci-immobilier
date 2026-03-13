@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link"; // Importation du composant Link
 
 export default function Recrutement() {
   return (
     <section className="w-full bg-slate-200 overflow-hidden pt-0 pb-16 md:pb-24">
-      {/* On passe à gap-8 pour un espacement équilibré et élégant */}
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-start">
         
-        {/* --- Colonne Image : Trapèze inversé --- */}
+        {/* --- Colonne Image --- */}
         <div className="relative flex justify-center md:justify-end h-[350px] md:h-[420px] w-full order-1">
           <div 
             className="relative w-full h-full max-w-[480px] overflow-hidden shadow-2xl"
@@ -26,7 +26,7 @@ export default function Recrutement() {
           </div>
         </div>
 
-        {/* --- Colonne Texte : Léger recul pour la clarté --- */}
+        {/* --- Colonne Texte --- */}
         <div className="flex flex-col order-2 md:pl-8 mt-8 md:mt-20">
           <div className="max-w-xl">
             <div className="flex flex-col leading-tight mb-8">
@@ -34,7 +34,7 @@ export default function Recrutement() {
                 Devenez
               </h2>
               <p className="text-3xl md:text-4xl font-medium text-slate-800">
-                acteur de <span className="font-pinyon text-5xl md:text-6xl  ">votre succès</span>
+                acteur de <span className="font-pinyon text-5xl md:text-6xl">votre succès</span>
               </p>
             </div>
 
@@ -47,10 +47,15 @@ export default function Recrutement() {
               </p>
             </div>
 
-            {/* Bouton d'action */}
-            <button className="group relative bg-slate-800 text-white px-10 py-4 text-lg font-medium transition-all duration-300 ease-in-out hover:bg-teal-700 hover:shadow-xl active:scale-95 w-fit">
+            {/* Bouton transformé en Link pour le SEO et l'accessibilité */}
+            <Link 
+              href="https://join.merci-immobilier.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block group relative bg-slate-800 text-white px-10 py-4 text-lg font-medium transition-all duration-300 ease-in-out hover:bg-teal-700 hover:shadow-xl active:scale-95 w-fit"
+            >
               Nous rejoindre
-            </button>
+            </Link>
           </div>
         </div>
 
