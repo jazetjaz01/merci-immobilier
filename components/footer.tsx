@@ -11,9 +11,9 @@ import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
 
-  { title: "Estimation", href: "#" },
+  { title: "Estimation", href: "/estimation" },
   { title: "Honoraires", href: "/honoraires" },
-  { title: "Recrutement", href: "#" },
+  { title: "Nous rejoindre", href: "https://join.merci-immobilier.com" },
   { title: "Contact", href: "contact" },
   { title: "Mentions Légales", href: "mentions" },
     { title: "Confidentialite", href: "confidentialite" },
