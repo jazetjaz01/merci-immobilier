@@ -1,8 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
+// Force Next.js à ne jamais mettre cette route en cache
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
-  // 1. Récupération et vérification des clés d'environnement
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const partnerId = process.env.APIMO_PARTNER_ID;
@@ -10,23 +12,17 @@ export async function GET() {
   const agencyId = process.env.APIMO_AGENCY_ID;
 
   if (!supabaseUrl || !supabaseKey || !partnerId || !token || !agencyId) {
-    return NextResponse.json({ 
-      error: "Variables d'environnement manquantes dans .env.local",
-      details: { supabaseUrl: !!supabaseUrl, supabaseKey: !!supabaseKey, apimo: !!token }
-    }, { status: 500 });
+    return NextResponse.json({ error: "Variables d'environnement manquantes" }, { status: 500 });
   }
 
-  // 2. Initialisation du client Supabase à l'intérieur du GET
   const supabase = createClient(supabaseUrl, supabaseKey);
 
-  // 3. Fonction interne pour l'upload d'images
   async function uploadImageToSupabase(url: string, propertyId: number, imageId: number) {
     try {
       const response = await fetch(url);
-      if (!response.ok) throw new Error(`Échec téléchargement image ${imageId}`);
+      if (!response.ok) return null;
       
-      const arrayBuffer = await response.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
+      const buffer = Buffer.from(await response.arrayBuffer());
       const filePath = `${propertyId}/${imageId}.jpg`;
 
       const { error: uploadError } = await supabase.storage
@@ -44,41 +40,37 @@ export async function GET() {
   }
 
   try {
-    // 4. Appel à l'API Apimo
     const auth = Buffer.from(`${partnerId}:${token}`).toString('base64');
     const res = await fetch(`https://api.apimo.pro/agencies/${agencyId}/properties`, {
       headers: { 
         'Authorization': `Basic ${auth}`,
         'Accept': 'application/json' 
       },
-      cache: 'no-store'
+      next: { revalidate: 0 } // Désactive le cache au niveau du fetch
     });
 
     const data = await res.json();
 
     if (!data.properties || data.properties.length === 0) {
-      return NextResponse.json({ message: "Aucune annonce trouvée dans Apimo." });
+      return NextResponse.json({ message: "Aucune annonce trouvée." });
     }
 
+    console.log(`🚀 Début de synchro : ${data.properties.length} biens trouvés.`);
     const syncResults = [];
 
-    // 5. Boucle sur les propriétés
     for (const p of data.properties) {
-      const localImageUrls = [];
-
-      if (p.pictures && p.pictures.length > 0) {
-        // On limite aux 15 premières photos pour la rapidité
-        for (const pic of p.pictures.slice(0, 15)) {
-          const publicUrl = await uploadImageToSupabase(pic.url, p.id, pic.id);
-          if (publicUrl) localImageUrls.push(publicUrl);
-        }
-      }
+      // OPTIMISATION : On lance les uploads d'images en PARALLÈLE pour ce bien
+      const imagePromises = (p.pictures || [])
+        .slice(0, 12) // On limite à 12 pour la stabilité
+        .map((pic: any) => uploadImageToSupabase(pic.url, p.id, pic.id));
+      
+      const localImageUrls = (await Promise.all(imagePromises)).filter(url => url !== null);
 
       const propertyData = {
         id: p.id,
         reference: p.reference?.toString(),
-        title: p.comments[0]?.title || "Annonce Merci Immobilier",
-        description: p.comments[0]?.comment || "",
+        title: p.comments?.[0]?.title || "Annonce Merci Immobilier",
+        description: p.comments?.[0]?.comment || "",
         price: p.price?.value || 0,
         city: p.city?.name || "Perpignan",
         zipcode: p.city?.zipcode || "66000",
@@ -89,7 +81,6 @@ export async function GET() {
         raw_apimo_json: p,
         images: localImageUrls,
         updated_at: new Date().toISOString()
-        
       };
 
       const { error: upsertError } = await supabase
@@ -97,9 +88,10 @@ export async function GET() {
         .upsert(propertyData, { onConflict: 'id' });
 
       if (upsertError) {
-        console.error(`❌ Erreur DB pour le bien ${p.id}:`, upsertError);
+        console.error(`❌ Erreur DB bien ${p.id}:`, upsertError.message);
       } else {
         syncResults.push(p.id);
+        console.log(`✅ Bien ${p.id} synchronisé.`);
       }
     }
 
@@ -110,6 +102,7 @@ export async function GET() {
     });
 
   } catch (error: any) {
+    console.error("💥 Erreur critique sync :", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

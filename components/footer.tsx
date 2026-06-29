@@ -17,6 +17,7 @@ const footerLinks = [
   { title: "Contact", href: "contact" },
   { title: "Mentions Légales", href: "mentions" },
     { title: "Confidentialite", href: "confidentialite" },
+    { title: "Unbienimmo", href: "https://www.unbienimmo.com" },
 ];
 
 const Footer = () => {
