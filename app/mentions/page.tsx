@@ -1,12 +1,17 @@
-"use client";
-
+import type { Metadata } from "next";
 import React from "react";
-import { 
-  ShieldCheck, 
-  Scale, 
-  Building2, 
+import {
+  ShieldCheck,
+  Scale,
+  Building2,
   Server
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Mentions légales",
+  description: "Mentions légales du site Merci Immobilier : éditeur, hébergeur et conditions d'utilisation.",
+  alternates: { canonical: "/mentions" },
+};
 
 export default function MentionsLegalesPage() {
   

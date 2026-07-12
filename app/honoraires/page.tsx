@@ -1,6 +1,14 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FileText, Info, CheckCircle2 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Honoraires d'agence",
+  description:
+    "Consultez le barème des honoraires de Merci Immobilier pour la vente de votre maison ou appartement à Perpignan et ses environs.",
+  alternates: { canonical: "/honoraires" },
+};
 
 const honorairesData = [
   { tranche: "Inférieur à 15 000 €", ht: "1 667 €", ttc: "2 000 €" },

@@ -1,136 +1,150 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { 
-  MapPin, 
-  Maximize, 
-  Layers, 
-  ChevronLeft, 
-  Phone, 
-  Mail, 
-  Grid, 
-  X, 
-  ChevronRight,
-  Loader2 
+import { cache } from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import {
+  MapPin,
+  Maximize,
+  Layers,
+  ChevronLeft,
+  Phone,
 } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 import PropertyDiagnostics from "@/components/PropertyDiagnostics";
 import ContactForm from "@/components/ContactForm";
+import PropertyGallery from "./PropertyGallery";
 
-export default function PropertyDetailPage() {
-  const { id } = useParams();
-  const router = useRouter();
-  const [property, setProperty] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [currentImageIdx, setCurrentImageIdx] = useState(0);
+const siteUrl = "https://www.merci-immobilier.com";
 
-  useEffect(() => {
-    async function fetchProperty() {
-      const supabase = createClient();
-      
-      const { data, error } = await supabase
-        .from("properties")
-        .select(`
-          *,
-          agents (
-            name,
-            email,
-            phone,
-            job_title,
-            photo_url
-          )
-        `)
-        .eq("id", id)
-        .single();
+const getProperty = cache(async (id: string) => {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("properties")
+    .select(`
+      *,
+      agents (
+        name,
+        email,
+        phone,
+        job_title,
+        photo_url
+      )
+    `)
+    .eq("id", id)
+    .single();
 
-      if (error || !data) {
-        router.push("/annonces");
-      } else {
-        setProperty(data);
-      }
-      setLoading(false);
-    }
-    fetchProperty();
-  }, [id, router]);
+  return data;
+});
 
-  const openGallery = (index: number) => {
-    setCurrentImageIdx(index);
-    setIsGalleryOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const property = await getProperty(id);
 
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-teal-600/5">
-        <Loader2 className="h-12 w-12 animate-spin text-teal-700 mb-4" />
-        <p className="text-teal-900 font-medium tracking-widest uppercase text-xs">Merci Immobilier  prépare la visite...</p>
-      </div>
-    );
+  if (!property) {
+    return { title: "Annonce introuvable" };
   }
 
-  if (!property) return null;
+  const priceLabel = property.price > 0 ? `${property.price.toLocaleString()} €` : "Prix sur demande";
+  const title = `${property.title} - ${property.city} (${priceLabel})`;
+  const description = property.description
+    ? property.description.slice(0, 155)
+    : `${property.title} à vendre à ${property.city}. ${property.surface} m², ${property.rooms} pièces. ${priceLabel}.`;
+  const image = property.images?.[0];
 
-  // --- EXTRACTION DYNAMIQUE DEPUIS APIMO ---
-  // On regarde d'abord dans le JSON brut d'Apimo, sinon on utilise la table agents
+  return {
+    title,
+    description,
+    alternates: { canonical: `/annonces/${id}` },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/annonces/${id}`,
+      type: "website",
+      images: image ? [{ url: image, width: 1200, height: 800, alt: property.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
+  };
+}
+
+export default async function PropertyDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const property = await getProperty(id);
+
+  if (!property) {
+    notFound();
+  }
+
   const apimoUser = property.raw_apimo_json?.user;
-  
+
   const agentInfo = {
     name: apimoUser ? `${apimoUser.firstname} ${apimoUser.lastname}` : property.agents?.name || "L'équipe Merci",
     phone: apimoUser?.mobile || apimoUser?.phone || property.agents?.phone || "0616224682",
     email: apimoUser?.email || property.agents?.email || "contact@merci-immo.com",
     photo: apimoUser?.picture || property.agents?.photo_url,
-    job: property.agents?.job_title || "Conseiller Immobilier"
+    job: property.agents?.job_title || "Conseiller Immobilier",
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: property.title,
+    description: property.description,
+    url: `${siteUrl}/annonces/${id}`,
+    image: property.images,
+    about: {
+      "@type": property.property_type === 2 ? "House" : "Apartment",
+      name: property.title,
+      numberOfRooms: property.rooms,
+      floorSize: {
+        "@type": "QuantitativeValue",
+        value: property.surface,
+        unitCode: "MTK",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: property.city,
+        postalCode: property.zipcode,
+        addressCountry: "FR",
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      price: property.price,
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+    },
   };
 
   return (
     <div className="min-h-screen bg-slate-200 pt-6 pb-4 font-sans relative">
-      
-      {/* --- LIGHTBOX --- */}
-      {isGalleryOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center" onClick={closeGallery}>
-          <button onClick={closeGallery} className="absolute top-6 right-6 text-white hover:text-teal-400 z-[110]"><X className="h-10 w-10" /></button>
-          <div className="relative w-full max-w-6xl h-[80vh] flex items-center justify-center px-4" onClick={(e) => e.stopPropagation()}>
-            <img src={property.images[currentImageIdx]} className="max-w-full max-h-full object-contain" alt="Vue" />
-            <button onClick={() => setCurrentImageIdx(prev => prev === 0 ? property.images.length - 1 : prev - 1)} className="absolute left-4 text-white p-4"><ChevronLeft className="h-10 w-10" /></button>
-            <button onClick={() => setCurrentImageIdx(prev => prev === property.images.length - 1 ? 0 : prev + 1)} className="absolute right-4 text-white p-4"><ChevronRight className="h-10 w-10" /></button>
-          </div>
-        </div>
-      )}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <div className="container mx-auto px-4">
-        {/* Navigation retour */}
         <div className="mb-6">
-          <button onClick={() => router.back()} className="flex items-center text-slate-400 hover:text-teal-700 text-xs uppercase tracking-[0.2em] font-bold transition-colors">
+          <Link href="/annonces" className="flex items-center text-slate-400 hover:text-teal-700 text-xs uppercase tracking-[0.2em] font-bold transition-colors w-fit">
             <ChevronLeft className="h-4 w-4 mr-1" /> Retour
-          </button>
+          </Link>
         </div>
 
-        {/* Grille d'images */}
-        <div className="relative grid grid-cols-1 md:grid-cols-4 gap-2 mb-10 group cursor-pointer overflow-hidden">
-          <div className="md:col-span-2 relative bg-slate-100 h-full" onClick={() => openGallery(0)}>
-            <img src={property.images[0]} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Vue principale" />
-          </div>
-          <div className="hidden md:grid md:col-span-2 grid-cols-2 gap-2">
-             {property.images.slice(1, 5).map((img: string, idx: number) => (
-               <div key={idx} className="relative aspect-square overflow-hidden bg-slate-100" onClick={() => openGallery(idx + 1)}>
-                 <img src={img} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt={`Vue ${idx + 2}`} />
-               </div>
-             ))}
-          </div>
-          <button onClick={() => openGallery(0)} className="absolute bottom-6 right-6 bg-white border border-slate-900 px-6 py-3 text-xs font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-slate-900 hover:text-white transition-all shadow-xl z-20 rounded-none">
-            <Grid className="h-4 w-4" /> {property.images.length} photos
-          </button>
-        </div>
+        <PropertyGallery images={property.images || []} title={property.title} />
 
-        {/* Infos Titre & Prix */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10 pb-10 border-b border-slate-100">
           <div>
             <h1 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-3">{property.title}</h1>
@@ -149,7 +163,6 @@ export default function PropertyDetailPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2">
-            {/* Caractéristiques */}
             <div className="flex flex-wrap gap-12 mb-12 py-6 border-b border-slate-50">
               <div className="flex items-center gap-4">
                 <div className="bg-teal-600/5 p-4"><Maximize className="h-7 w-7 text-teal-700" /></div>
@@ -161,7 +174,6 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
-            {/* Description */}
             <div className="mb-12">
               <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-teal-700 mb-6 flex items-center gap-4">Description <span className="h-[1px] flex-1 bg-teal-50"></span></h2>
               <p className="text-slate-600 leading-relaxed whitespace-pre-wrap text-lg font-light">{property.description}</p>
@@ -169,17 +181,16 @@ export default function PropertyDetailPage() {
             <PropertyDiagnostics rawApimoJson={property.raw_apimo_json} />
           </div>
 
-          {/* --- BLOC CONTACT DYNAMIQUE --- */}
           <div className="lg:col-span-1">
             <div className="sticky top-32 bg-white border border-slate-100 p-8 shadow-2xl">
-              
               <div className="flex items-center gap-5 mb-8">
                 <div className="h-20 w-20 bg-teal-700 flex flex-shrink-0 items-center justify-center text-white text-3xl font-bold overflow-hidden shadow-inner border border-slate-100">
                   {agentInfo.photo ? (
-                    <img 
-                      src={agentInfo.photo} 
-                      alt={agentInfo.name} 
-                      className="w-full h-full object-cover" 
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={agentInfo.photo}
+                      alt={agentInfo.name}
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <span className="font-serif">{agentInfo.name.charAt(0)}</span>
@@ -202,7 +213,7 @@ export default function PropertyDetailPage() {
               </div>
 
               <div className="space-y-3 mb-8">
-               <ContactForm property={property} agent={agentInfo} />
+                <ContactForm property={property} agent={agentInfo} />
               </div>
 
               <div className="pt-8 border-t border-slate-100">

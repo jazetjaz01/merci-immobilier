@@ -1,15 +1,20 @@
-"use client";
-
+import type { Metadata } from "next";
 import React from "react";
-import { 
-  Lock, 
-  Eye, 
-  UserCheck, 
-  Database, 
-  Share2, 
+import {
+  Lock,
+  Eye,
+  UserCheck,
+  Database,
+  Share2,
   ShieldAlert,
   HelpCircle
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Politique de confidentialité",
+  description: "Découvrez comment Merci Immobilier collecte, utilise et protège vos données personnelles conformément au RGPD.",
+  alternates: { canonical: "/confidentialite" },
+};
 
 export default function ConfidentialitePage() {
   

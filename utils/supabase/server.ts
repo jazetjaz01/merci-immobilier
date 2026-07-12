@@ -2,8 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-// Attention : Utilise bien ta clé ANON_KEY ici pour le client standard
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; 
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
 
 export const createClient = async () => {
   // 1. On attend (await) la résolution des cookies

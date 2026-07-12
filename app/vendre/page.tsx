@@ -4,8 +4,9 @@ import Hero1 from "@/components/vendre/Hero1";
 import VendreAction from "@/components/vendre/VendreAction2";
 import EstimerAgence3 from "@/components/vendre/EstimerAgence3";
 export const metadata = {
-  title: "Vendre mon bien | Merci Immobilier",
+  title: "Vendre mon bien",
   description: "Confiez la vente de votre maison ou appartement à notre agence. Estimation offerte et accompagnement sur-mesure à Perpignan et ses environs.",
+  alternates: { canonical: "/vendre" },
 };
 
 export default function VendrePage() {
