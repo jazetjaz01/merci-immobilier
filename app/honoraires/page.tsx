@@ -13,18 +13,18 @@ export const metadata: Metadata = {
 const honorairesData = [
   { tranche: "Inférieur à 15 000 €", ht: "1 667 €", ttc: "2 000 €" },
   { tranche: "15 000 € à 29 999 €", ht: "2 500 €", ttc: "3 000 €" },
-  { tranche: "30 000 € à 39 999 €", ht: "2 916 €", ttc: "3 500 €" },
+  { tranche: "30 000 € à 39 999 €", ht: "2 917 €", ttc: "3 500 €" },
   { tranche: "40 000 € à 49 999 €", ht: "3 333 €", ttc: "4 000 €" },
-  { tranche: "50 000 € à 59 999 €", ht: "4 166 €", ttc: "5 000 €" },
+  { tranche: "50 000 € à 59 999 €", ht: "4 167 €", ttc: "5 000 €" },
   { tranche: "60 000 € à 69 999 €", ht: "5 000 €", ttc: "6 000 €" },
   { tranche: "70 000 € à 79 999 €", ht: "5 833 €", ttc: "7 000 €" },
-  { tranche: "80 000 € à 94 999 €", ht: "6 666 €", ttc: "8 000 €" },
-  { tranche: "95 000 € à 134 999 €", ht: "7 083 €", ttc: "9 000 €" },
-  { tranche: "135 000 € à 144 999 €", ht: "7 500 €", ttc: "9 500 €" },
+  { tranche: "80 000 € à 94 999 €", ht: "6 667 €", ttc: "8 000 €" },
+  { tranche: "95 000 € à 134 999 €", ht: "7 500 €", ttc: "9 000 €" },
+  { tranche: "135 000 € à 144 999 €", ht: "7 917 €", ttc: "9 500 €" },
   { tranche: "145 000 € à 179 999 €", ht: "8 333 €", ttc: "10 000 €" },
-  { tranche: "180 000 € à 199 999 €", ht: "9 166 €", ttc: "11 000 €" },
+  { tranche: "180 000 € à 199 999 €", ht: "9 167 €", ttc: "11 000 €" },
   { tranche: "200 000 € à 239 999 €", ht: "10 000 €", ttc: "12 000 €" },
-  { tranche: "À partir de 240 000 €", ht: "4,166 %", ttc: "5 %" },
+  { tranche: "À partir de 240 000 €", ht: "4,167 %", ttc: "5 %" },
 ];
 
 export default function HonorairesPage() {
